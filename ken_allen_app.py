@@ -33,17 +33,17 @@ with header_col:
     st.title("🗂️ Ken Allen Archive")
     st.markdown(f"**Samuel B. Griffith Foundation for Chinese Military Studies** © {datetime.now().year}")
 with logo_col:
-    if os.path.exists("/Users/workspace/sbgf_logo.webp"):
+    if os.path.exists("sbgf_logo.webp"):
         st.markdown("<br>", unsafe_allow_html=True)
-        st.image("/Users/workspace/sbgf_logo.webp", width=80)
+        st.image("sbgf_logo.webp", width=80)
 st.divider()
 
 # --- Bio Section ---
 col_photo, col_bio = st.columns([1, 3], gap="large")
 with col_photo:
-    if os.path.exists("/Users/workspace/ken_allen_photo.webp"):
+    if os.path.exists("ken_allen_photo.webp"):
         st.markdown("<br><br>", unsafe_allow_html=True)
-        st.image("/Users/workspace/ken_allen_photo.webp", use_container_width=True, caption="Kenneth W. Allen")
+        st.image("ken_allen_photo.webp", use_container_width=True, caption="Kenneth W. Allen")
 with col_bio:
     st.subheader("About Kenneth W. Allen")
     st.markdown("""
