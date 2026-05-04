@@ -41,9 +41,11 @@ st.divider()
 # --- Bio Section ---
 col_photo, col_bio = st.columns([1, 3], gap="large")
 with col_photo:
-    if os.path.exists("ken_allen_photo.webp"):
+    try:
         st.markdown("<br><br>", unsafe_allow_html=True)
         st.image("ken_allen_photo.webp", use_container_width=True, caption="Kenneth W. Allen")
+    except:
+        pass
 with col_bio:
     st.subheader("About Kenneth W. Allen")
     st.markdown("""
