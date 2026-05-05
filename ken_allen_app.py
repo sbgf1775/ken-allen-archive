@@ -265,7 +265,7 @@ elif mode == "📚 Browse":
         st.subheader("Documents by Folder")
         folder_counts = browsed["folder"].value_counts().reset_index()
         folder_counts.columns = ["Folder", "Count"]
-        st.dataframe(folder_counts, use_container_width=True, hide_index=True)
+        st.dataframe(folder_counts, width="stretch", hide_index=True)
         st.divider()
 
     st.subheader(f"Documents ({len(browsed)})")
@@ -365,7 +365,7 @@ Note: 502 of 943 documents have a detectable publication year; the remainder are
                     tickfont=dict(color="white", size=11)
                 )
             )
-            st.plotly_chart(fig_area, use_container_width=True)
+            st.plotly_chart(fig_area, width="stretch")
 
             col1, col2, col3, col4 = st.columns(4)
             yearly_totals = df_time.groupby("year").size()
@@ -438,7 +438,7 @@ For example, selecting **Diplomacy** will show terms like 'exchanges,' 'exercise
                 )
             )
             with kw_col2:
-                st.plotly_chart(fig_kw, use_container_width=True)
+                st.plotly_chart(fig_kw, width="stretch")
         else:
             with kw_col2:
                 st.info("Not enough keyword data for this topic.")
@@ -498,7 +498,7 @@ reflecting the cross-domain nature of diplomatic engagement work.
             )
         )
         fig_heat.update_traces(textfont=dict(color="white", size=10))
-        st.plotly_chart(fig_heat, use_container_width=True)
+        st.plotly_chart(fig_heat, width="stretch")
 
         st.divider()
 
@@ -538,7 +538,7 @@ and where Ken Allen's research has been most concentrated over his career.
             ),
             margin=dict(t=50, l=10, r=10, b=10)
         )
-        st.plotly_chart(fig_tree, use_container_width=True)
+        st.plotly_chart(fig_tree, width="stretch")
 
 
         st.divider()
@@ -661,7 +661,7 @@ Use the multiselect below to customize which leaders are displayed.
                         tickfont=dict(color="white", size=11)
                     )
                 )
-                st.plotly_chart(fig_lead, use_container_width=True)
+                st.plotly_chart(fig_lead, width="stretch")
 
                 # Top mentioned leaders overall
                 top_leaders = lead_df.groupby("leader")["mentions"].sum().sort_values(ascending=False)
