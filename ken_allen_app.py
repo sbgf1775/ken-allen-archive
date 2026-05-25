@@ -16,6 +16,15 @@ import itertools
 
 st.set_page_config(page_title="Ken Allen Archive", page_icon="🗂️", layout="wide")
 
+st.markdown("""
+    <style>
+        #MainMenu {visibility: hidden;}
+        header[data-testid="stHeader"] {visibility: hidden;}
+        .stDeployButton {display: none;}
+        [data-testid="stToolbar"] {display: none;}
+    </style>
+""", unsafe_allow_html=True)so l
+
 @st.cache_data(ttl=0)
 def load_data():
     if os.path.exists("ken_allen_scored.csv"):
