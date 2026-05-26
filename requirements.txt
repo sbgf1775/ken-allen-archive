@@ -1,6 +1,6 @@
-streamlit
-pandas
-pyvis
-plotly
-wordcloud
-matplotlib
+streamlit==1.57.0
+pandas==3.0.2
+pyvis==0.3.2
+plotly==6.7.0
+wordcloud==1.9.6
+matplotlib==3.10.8
