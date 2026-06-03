@@ -4,6 +4,14 @@ import pandas as pd
 import os
 import random
 import html
+import opencc
+import unicodedata
+_converter = opencc.OpenCC("t2s")  # Traditional → Simplified
+
+def normalize_cjk(text: str) -> str:
+    """Normalize CJK text: Traditional→Simplified, then Unicode NFC."""
+    return unicodedata.normalize("NFC", _converter.convert(str(text)))
+
 from datetime import datetime
 from pyvis.network import Network
 import streamlit.components.v1 as components
@@ -883,19 +891,28 @@ if mode == "🔍 Search":
         st.session_state.search_placeholder = f"e.g. {picks[0]}, {picks[1]}..."
 
     query = st.text_input("Enter search terms", placeholder=st.session_state.search_placeholder)
+    unihan_toggle = st.checkbox(
+        "🔤 Normalize Chinese character variants (Unihan)",
+        value=True,
+        help="When on, Simplified and Traditional characters (e.g. 军/軍) and script variants (e.g. 裏/裡) are treated as equivalent. Turn off to search for a specific character form."
+    )
 
     if not query:
         st.info("Enter a search term above to find relevant documents.")
         st.stop()
 
-    query_terms = query.lower().split()
+    if unihan_toggle:
+        query_terms = normalize_cjk(query).lower().split()
+    else:
+        query_terms = query.lower().split()
 
     def relevance_score(row):
-        text = " ".join([
+        raw_text = " ".join([
             str(row.get("filename", "")),
             str(row.get("text_snippet", "")),
             str(row.get("top_keywords", ""))
         ]).lower()
+        text = normalize_cjk(raw_text) if unihan_toggle else raw_text
         return sum(text.count(term) for term in query_terms)
 
     df_filtered["relevance"] = df_filtered.apply(relevance_score, axis=1)
